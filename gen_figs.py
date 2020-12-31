@@ -1,6 +1,5 @@
 import requests
 import altair as alt
-import numpy as np
 import pandas as pd
 import sys
 import warnings
@@ -19,7 +18,7 @@ def plot_chart(df, cmap):
         )),    tooltip = ['location', 'date:T', 'total_vaccinations_per_hundred']
     ).configure_point(
         size=50
-    ).properties(width=200*1.61, height=200, title=f'Vaccination status {datetime.now().astimezone(timezone.utc).strftime("%Y-%m-%d %H:%M")} (UTC)')
+    ).properties(width=300*1.61, height=300, title=f'Vaccination status {datetime.now().astimezone(timezone.utc).strftime("%Y-%m-%d %H:%M")} (UTC)')
 
 def main():
     try:
@@ -33,16 +32,19 @@ def main():
         
     ## Main countries
     country_vs_color = OrderedDict({
-        'Israel':         'lightblue',
-        'Bahrain':        'yellow',
-        'United Kingdom': 'purple',
-        'United States':  'blue',
-        'Canada':         'lightgray',
-        'China':          'red',
-        'Russia':         'brown',
-        'European Union': 'orange',
-        'Japan':          'gray'
+        'Israel':         '#1A85FF',
+        'Bahrain':        '#FEFE62',
+        'United Kingdom': '#40B0A6',
+        'United States':  '#4B0092',
+        'Canada':         '#D35FB7',
+        'China':          '#DC3220',
+        'Russia':         '#994F00',
+        'European Union': '#E66100',
+        'Japan':          '#E1BE6A',
+        'Australia':      '#000000',
+        'India':          '#D35FB7'
     })
+
     cmap = OrderedDict({k:country_vs_color[k] for k in [x for x in max_values.location if x in country_vs_color.keys()]})
     print('Main countries:     ', ",".join(list(cmap.keys())))
     chart = plot_chart(df, cmap)
@@ -50,16 +52,24 @@ def main():
     
     ## European countries
     country_vs_color = OrderedDict({
-        'Portugal': 'green',
-        'Denmark': 'red',
-        'Lithuania': 'orange',
-        'Germany': 'brown',
-        'Estonia': 'lightblue',
-        'Latvia': 'pink',
-        'Italy': 'lightgreen',
-        'Poland': 'lightgray',
-        'Romania': 'yellow'
+        'Austria':    '#000000',
+        'Bulgaria':   '#004949',
+        'Croatia':    '#009292',
+        'Denmark':    '#ff6db6',
+        'Estonia':    '#ffb6db',
+        'France':     '#490092',
+        'Germany':    '#006ddb',
+        'Greece':     '#b66dff',
+        'Hungary':    '#6db6ff',
+        'Italy':      '#b6dbff',
+        'Latvia':     '#920000',
+        'Lithuania':  '#924900',
+        'Luxembourg': '#db6d00',
+        'Poland':     '#24ff24',
+        'Portugal':   '#ffff6d',
+        'Romania':    '#000000'
     })
+
     cmap = OrderedDict({k:country_vs_color[k] for k in [x for x in max_values.location if x in country_vs_color.keys()]})
     print('European countries: ', ",".join(list(cmap.keys())))
     chart = plot_chart(df, cmap)
