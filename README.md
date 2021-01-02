@@ -9,6 +9,8 @@ Reads the latest numbers from the [github repository of Our World in Data](https
 ![main countries](out/european-countries.png)
 
 ## Used python libraries:
-* pandas
-* altair
+* matplotlib, numpy, pandas, requests
+see [lambda/requirements.txt](requirements.txt)
 
+## AWS deployment
+sdd [lambda/README.md](lambda/README.md)

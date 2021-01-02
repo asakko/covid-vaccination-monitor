@@ -9,7 +9,7 @@ from datetime import datetime, timezone
 from io import StringIO
 
 def plot_chart(df, cmap):
-    return alt.Chart(df[df.location.isin(cmap.keys())]).mark_line(point=True, strokeWidth=2).encode(
+    return alt.Chart(df[(df.location.isin(cmap.keys())) & (~df.total_vaccinations_per_hundred.isna())]).mark_line(point=True, strokeWidth=2).encode(
         x       = alt.X('date:T', title='Date'),
         y       = alt.Y('total_vaccinations_per_hundred:Q', title='Vaccinated [%]'),
         color   = alt.Color('location:N', title='Country', scale=alt.Scale(
